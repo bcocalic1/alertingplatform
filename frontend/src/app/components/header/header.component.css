@@ -1,0 +1,34 @@
+.header{
+    text-align: center;
+    background-color: darkcyan;
+    height: 100px;
+    /* position: fixed; */
+    position: fixed;
+    width: 100%;
+    margin: auto;
+    top: 0;
+    left: 0;
+    right: 0;
+    /* padding-top: 20px; */
+    justify-content: center;
+    /* margin-top: -8px; */
+    font-size: 50px;
+    font-family: Cabin;
+    color: rgb(255, 241, 214);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+
+.header-image{
+    height: 55px;
+    width: 55px;
+    /* padding-top: 20px; */
+    transform: translateY(8px);
+}
+
+.header-text{
+    padding-top: 13px;
+}
+
+.content{
+    position: relative;
+}

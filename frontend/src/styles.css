@@ -1,1 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
+@font-face {
+    font-family: Quicksand;
+    src: url(assets/fonts/Quicksand.ttf);
+}
+@font-face {
+    font-family: Cabin;
+    src: url(assets/fonts/Cabin-Regular.ttf);
+}
+@font-face {
+    font-family: Koho;
+    src: url(assets/fonts/KoHo-Regular.ttf);
+}
