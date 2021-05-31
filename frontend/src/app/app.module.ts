@@ -20,7 +20,7 @@ import { AlertCardComponent } from './components/alert-card/alert-card.component
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [BodyComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
