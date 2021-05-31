@@ -1,0 +1,70 @@
+.card{
+    /* background-color: rgb(247, 232, 219); */
+    background-color: rgb(244, 223, 206);
+    width: 700px;
+    height: 110px;
+    margin: auto;
+    margin-top: 25px;
+    border-radius: 10px;
+    padding: 30px;
+    border: olive 1px solid;
+    box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
+    font-family: Cabin;
+    position: relative;
+}
+
+.alert-title{
+    font-size: 23px;
+    display: block;
+    margin-top: -5px;
+    font-weight: bold;
+}
+
+.alert-icon{
+    height: 22px;
+    width: 22px;
+    top: 3px;
+    position: relative;
+    z-index: 1;
+}
+
+.alert-properties{
+    display: block;
+    margin-top: 10px;
+    font-family: Quicksand;
+}
+
+.acknowledge-button{
+    position: absolute;
+    right: 20px;
+    top: 65px;
+    height: 45px;
+    width: 200px;
+    font-family: Quicksand;
+    font-size: 15px;
+    background-color: rgb(186, 208, 147);
+    border-radius: 10px;
+    font-weight: bold;
+    border: none;
+    /* border: 0.1em solid; */
+    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+}
+
+.acknowledge-button:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+    border: 0.1em solid; 
+}
+
+.acknowledge-button:active{
+    transform: translateY(1px);
+}
+
+.bold{
+    font-weight: bold;
+    font-family: Cabin;
+}
+
+.critical{
+    color: red;
+    font-weight: bold;
+}

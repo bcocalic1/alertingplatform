@@ -6,13 +6,15 @@ import { AppComponent } from './app.component';
 import { HeaderComponent } from './components/header/header.component';
 import { BodyComponent } from './components/body/body.component';
 import { MenuComponent } from './components/menu/menu.component';
+import { AlertCardComponent } from './components/alert-card/alert-card.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     BodyComponent,
-    MenuComponent
+    MenuComponent,
+    AlertCardComponent
   ],
   imports: [
     BrowserModule,
