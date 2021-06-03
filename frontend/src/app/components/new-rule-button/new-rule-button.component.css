@@ -1,0 +1,41 @@
+.new-rule-button{
+    margin: auto;
+    margin-top: 25px;
+    display: block;
+    width: 250px;
+    height: 50px;
+    background-color: rgb(160, 228, 205);
+    font-size: 20px;
+    font-family: Quicksand;
+    border: 1px olive solid;
+    border-radius: 15px;
+    padding: 10px;
+    justify-content: center;
+    position: relative;
+}
+
+.new-rule-button:hover{
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+}
+
+.new-rule-button:active{
+    transform: translateY(2.5px);
+    border: 2px olive solid;
+}
+
+.icon{
+    height: 28px;
+    width: 28px;
+    z-index: 1;
+    display: block;
+    position: absolute;
+    right: 30px;
+    top: 10px;
+}
+
+.btn-text{
+    position: absolute;
+    top: 11px;
+    left: 50px;
+    display: block;
+}

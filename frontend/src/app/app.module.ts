@@ -7,6 +7,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { BodyComponent } from './components/body/body.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { AlertCardComponent } from './components/alert-card/alert-card.component';
+import { NewRuleButtonComponent } from './components/new-rule-button/new-rule-button.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { AlertCardComponent } from './components/alert-card/alert-card.component
     HeaderComponent,
     BodyComponent,
     MenuComponent,
-    AlertCardComponent
+    AlertCardComponent,
+    NewRuleButtonComponent
   ],
   imports: [
     BrowserModule,

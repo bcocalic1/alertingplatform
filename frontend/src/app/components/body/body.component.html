@@ -1,4 +1,5 @@
 <div class="canvas">
     <app-menu></app-menu>
     <app-alert-card *ngIf="this.alerts"></app-alert-card>
+    <app-new-rule-button *ngIf="!this.alerts"></app-new-rule-button>
 </div>
