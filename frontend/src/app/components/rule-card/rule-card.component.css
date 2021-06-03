@@ -2,7 +2,7 @@
     /* background-color: rgb(247, 232, 219); */
     background-color: rgb(244, 223, 206);
     width: 700px;
-    height: 110px;
+    height: 120px;
     margin: auto;
     margin-top: 25px;
     border-radius: 10px;
@@ -13,51 +13,55 @@
     position: relative;
 }
 
-.alert-title{
+.rule-title{
     font-size: 23px;
     display: block;
     margin-top: -5px;
     font-weight: bold;
 }
 
-.alert-icon{
-    height: 22px;
-    width: 22px;
-    top: 3px;
-    position: relative;
-    z-index: 1;
-}
-
-.alert-properties{
+.rule-properties{
     display: block;
     margin-top: 10px;
     font-family: Quicksand;
 }
 
-.acknowledge-button{
+.rule-modifiers{
     position: absolute;
-    right: 20px;
-    top: 65px;
-    height: 45px;
-    width: 200px;
-    font-family: Quicksand;
-    font-size: 15px;
-    background-color: rgb(186, 208, 147);
+    right: 40px;
+    top: 48px;
+    
+}
+
+.rule-btn{
+    height: 40px;
+    width: 120px;
+    display: block;
+    margin-bottom: 10px;
     border-radius: 10px;
-    font-weight: bold;
     border: none;
-    /* border: 0.1em solid; */
-    box-shadow: rgba(0, 0, 0, 0.12) 0px 1px 3px, rgba(0, 0, 0, 0.24) 0px 1px 2px;
+    font-family: Cabin;
+    font-size: 16px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 
-.acknowledge-button:hover{
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-    border: 0.1em solid; 
+.rule-btn:hover{
+    border: 1px black solid;
 }
 
-.acknowledge-button:active{
+.rule-btn:active{
+    border: 2px black solid;
     transform: translateY(2px);
-    border: 0.1em solid; 
+}
+
+.edit{
+    background-color: rgb(51, 149, 210);
+    color: wheat;
+}
+
+.delete{
+    background-color: rgb(206, 54, 54);
+    color: wheat;
 }
 
 .bold{

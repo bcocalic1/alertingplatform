@@ -8,6 +8,7 @@ import { BodyComponent } from './components/body/body.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { AlertCardComponent } from './components/alert-card/alert-card.component';
 import { NewRuleButtonComponent } from './components/new-rule-button/new-rule-button.component';
+import { RuleCardComponent } from './components/rule-card/rule-card.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { NewRuleButtonComponent } from './components/new-rule-button/new-rule-bu
     BodyComponent,
     MenuComponent,
     AlertCardComponent,
-    NewRuleButtonComponent
+    NewRuleButtonComponent,
+    RuleCardComponent
   ],
   imports: [
     BrowserModule,
