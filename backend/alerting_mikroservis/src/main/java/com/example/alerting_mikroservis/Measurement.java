@@ -13,8 +13,10 @@ public class Measurement {
     private Integer numberOfProcessors;
 
     public Measurement(@JsonProperty("numberOfProcessors")Integer numberOfProcessors) {
+        System.out.println("number of processors(received from postman)1 = " + numberOfProcessors);
         this.measurement = new ArrayList<>();
         this.numberOfProcessors = numberOfProcessors;
+        System.out.println("number of processors(received from postman)2 = " + numberOfProcessors);
         for (int i = 0; i < this.numberOfProcessors.intValue(); i++) {
             this.measurement.add(ThreadLocalRandom.current().nextDouble(min, max));
         }
