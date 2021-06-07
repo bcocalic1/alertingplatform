@@ -40,3 +40,94 @@
     left: 50px;
     display: block;
 }
+
+.title{
+    font-family: Cabin;
+}
+
+.marginal{
+    margin-bottom: 8px;
+}
+
+.dropdown{
+    width: 500px;
+    height: 40px;
+    padding: 5px;
+    font-family: Quicksand;
+}
+
+.dropdown:focus{
+    border: 1px solid darkkhaki;
+    padding: 5px;
+}
+
+.ruleType{
+    width: 140px;
+    height: 40px;
+    padding: 5px;
+    font-family: Quicksand;
+}
+
+.ruleMetrics{
+    display: inline-block;
+    position: absolute;
+    right: 5px;
+    width: 100px;
+    height: 40px;
+    padding: 5px;
+    font-family: Quicksand;
+}
+
+.ruleText{
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    top: 6px;
+    left: 150px;
+    font-family: Quicksand;
+    font-size: 18px;
+}
+
+.ruleTextTwo{
+    display: inline-block;
+    justify-content: center;
+    position: absolute;
+    top: 5px;
+    left: 290px;
+    font-family: Quicksand;
+    font-size: 20px;
+}
+
+.ruleNumber{
+    display: inline-block;
+    position: absolute;
+    top: 5.5px;
+    left:245px;
+    width: 40px;
+    height: 30px;
+}
+
+.ruleNumberTwo{
+    display: inline-block;
+    position: absolute;
+    top: 5.5px;
+    left: 315px;
+    width: 40px;
+    height: 30px;
+}
+
+.close:hover{
+    background-color: red;
+}
+
+.center{
+    justify-content: center;
+}
+
+.label{
+    font-family: Quicksand;
+    display: block;
+    font-size: 16px;
+    margin-bottom: 5px;
+    margin-left: 1px;
+}

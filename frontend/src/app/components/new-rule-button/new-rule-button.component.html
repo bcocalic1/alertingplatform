@@ -5,24 +5,55 @@
 
 <ng-template #content let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">New Friend</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title title" id="modal-basic-title">New Rule</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <div class="modal-body">
-      <form>
-        <div class="form-group">
-          <label for="firstname">Firstname</label>
-          <div class="input-group">
-            <input id="firstname" class="form-control" >
-          </div>
-        </div>
-      </form>
+        <form>
+            <div class="form-group">
+                <label for="ruleName" class="label">Name:</label>
+                <div class="input-group marginal">
+                    <input id="ruleName" class="form-control label" placeholder="Enter name...">
+                </div>
+                <label for="service" class="label">Service:</label>
+                <div class="input-group marginal">
+                    <select name="service" id="service" class="dropdown">
+                        <option value="cpu">CPU</option>
+                        <option value="alerting">Alerting</option>
+                        <option value="temperature">Temperature</option>
+                        <option value="userManagement">User Management</option>
+                    </select>
+                </div>
+                <label for="severity" class="label">Severity:</label>
+                <div class="input-group marginal">
+                    <select name="severity" id="severity" class="dropdown">
+                        <option value="critical">Critical</option>
+                        <option value="temperature">High</option>
+                        <option value="userManagement">Normal</option>
+                        <option value="low">Low</option>
+                    </select>
+                </div>
+                <label for="rule" class="label">Rule:</label>
+                <div class="input-group marginal">
+                    <select name="ruleType" id="ruleType" class="ruleType">
+                        <option value="errorLogs">Error logs</option>
+                        <option value="temperature">Temperature</option>
+                    </select>
+                    <span class='ruleText'>more than</span>
+                    <input type="text" id="ruleNumber" class="ruleNumber">
+                    <span class="ruleTextTwo">in</span>
+                    <input type="text" id="ruleNumberTwo" class="ruleNumberTwo">
+                    <select name="ruleMetrics" id="ruleMetrics" class="ruleMetrics">
+                        <option value="minute">minutes</option>
+                        <option value="second">seconds</option>
+                    </select>
+                </div>
+            </div>
+        </form>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Save</button>
+        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Create Rule</button>
     </div>
-  </ng-template>
-
-  
+</ng-template>
