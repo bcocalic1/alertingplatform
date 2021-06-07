@@ -4,7 +4,7 @@
     display: block;
     width: 250px;
     height: 50px;
-    background-color: rgb(160, 228, 205);
+    background-color:  rgb(192, 240, 224);
     font-size: 20px;
     font-family: Quicksand;
     border: 1px olive solid;
@@ -16,7 +16,7 @@
 }
 
 .new-rule-button:hover{
-   background-color:  rgb(192, 240, 224);
+   background-color: rgb(160, 228, 205);
 }
 
 .new-rule-button:active{
