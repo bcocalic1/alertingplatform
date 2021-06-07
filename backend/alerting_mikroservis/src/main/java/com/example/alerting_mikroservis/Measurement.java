@@ -1,4 +1,4 @@
-package com.example.cpu_mikroservis.model;
+package com.example.alerting_mikroservis;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -12,14 +12,14 @@ public class Measurement {
     private final List<Double> measurement;
     private Integer numberOfProcessors;
 
-    public Measurement(@JsonProperty("numberOfProcessors")Integer numberOfProcessors) {
-        System.out.println("number of processors(received from postman)1 = " + numberOfProcessors);
+    public Measurement() {
+        System.out.println("Correct constructor");
         this.measurement = new ArrayList<>();
-        this.numberOfProcessors = numberOfProcessors;
-        System.out.println("number of processors(received from postman)2 = " + numberOfProcessors);
-        for (int i = 0; i < this.numberOfProcessors.intValue(); i++) {
-            this.measurement.add(ThreadLocalRandom.current().nextDouble(min, max));
-        }
+    }
+
+    public Measurement(Measurement measurement){
+        this.measurement = measurement.getMeasurement();
+        this.numberOfProcessors = measurement.getMeasurement().size();
     }
 
     public Measurement(List<Double> measurement) {
