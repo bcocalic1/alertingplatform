@@ -2,7 +2,7 @@
     /* background-color: rgb(247, 232, 219); */
     background-color: rgb(244, 223, 206);
     width: 700px;
-    height: 120px;
+    height: 205px;
     margin: auto;
     margin-top: 25px;
     border-radius: 10px;
@@ -29,7 +29,7 @@
 .rule-modifiers{
     position: absolute;
     right: 40px;
-    top: 48px;
+    top: 58px;
     
 }
 

@@ -2,7 +2,7 @@
     /* background-color: rgb(247, 232, 219); */
     background-color: rgb(244, 223, 206);
     width: 700px;
-    height: 110px;
+    height: 190px;
     margin: auto;
     margin-top: 25px;
     border-radius: 10px;
@@ -23,7 +23,7 @@
 .alert-icon{
     height: 22px;
     width: 22px;
-    top: 3px;
+    top: -3px;
     position: relative;
     z-index: 1;
 }
@@ -37,7 +37,7 @@
 .acknowledge-button{
     position: absolute;
     right: 20px;
-    top: 65px;
+    top: 70px;
     height: 45px;
     width: 200px;
     font-family: Quicksand;

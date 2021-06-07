@@ -23,7 +23,7 @@
     height: 55px;
     width: 55px;
     /* padding-top: 20px; */
-    transform: translateY(8px);
+    transform: translateY(-7px);
 }
 
 .header-text{

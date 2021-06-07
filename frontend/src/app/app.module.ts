@@ -10,6 +10,7 @@ import { AlertCardComponent } from './components/alert-card/alert-card.component
 import { NewRuleButtonComponent } from './components/new-rule-button/new-rule-button.component';
 import { RuleCardComponent } from './components/rule-card/rule-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    NgbModule
+    NgbModule,
+    FormsModule,
   ],
   providers: [BodyComponent],
   bootstrap: [AppComponent]
