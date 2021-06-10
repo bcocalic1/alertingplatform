@@ -38,21 +38,15 @@ public class MainController {
             System.out.println("No rule added for CPU");
             return;
         }
-        if(!rule.followsRule(measurement)){
-           //add new alert
-           System.out.println("Sending alert...");
+        if(rule.sendAlert(measurement)){
            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
            alertService.addAlert(alert);
-        }else{
-            System.out.println("Good measurement");
         }
     }
 
-    @PostMapping("/cpu/rule")
-    public void addRule(@RequestBody CPURule rule){
-        System.out.println("ruta 1");
+    @PostMapping("/rules")
+    public void addRule(@RequestBody Rule rule){
         this.ruleService.addRule(rule);
-        System.out.println("ruta 2");
     }
 
     @GetMapping("/rules")
