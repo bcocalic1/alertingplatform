@@ -1,16 +1,16 @@
 package com.example.cpu_mikroservis.dao;
 
-import com.example.cpu_mikroservis.model.Measurement;
+import com.example.cpu_mikroservis.model.CPUMeasurement;
 
 import java.util.List;
 
 public interface MeasurementDaoInterface {
 
-    void addMeasurement(Measurement measurement);
+    void addMeasurement(CPUMeasurement measurement);
 
     default void addMeasurement(Integer numberOfProcessors){
-        addMeasurement(new Measurement(numberOfProcessors));
+        addMeasurement(new CPUMeasurement(numberOfProcessors));
     }
 
-    List<Measurement> getMeasurements();
+    List<CPUMeasurement> getMeasurements();
 }

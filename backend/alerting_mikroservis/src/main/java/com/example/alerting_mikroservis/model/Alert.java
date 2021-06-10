@@ -1,4 +1,6 @@
-package com.example.alerting_mikroservis;
+package com.example.alerting_mikroservis.model;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Alert {
     private String name;
@@ -6,7 +8,7 @@ public class Alert {
     private String severity;
     private String description;
 
-    public Alert(String name, String service, String severity, String description) {
+    public Alert(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("description") String description) {
         this.name = name;
         this.service = service;
         this.severity = severity;
