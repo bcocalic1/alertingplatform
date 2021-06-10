@@ -48,14 +48,14 @@ public class MainController {
         }
     }
 
-    @PostMapping("/cpu/add")
+    @PostMapping("/cpu/rule")
     public void addRule(@RequestBody CPURule rule){
         System.out.println("ruta 1");
         this.ruleService.addRule(rule);
         System.out.println("ruta 2");
     }
 
-    @GetMapping("/rule/get")
+    @GetMapping("/rules")
     public List<Rule> getAllRules(){
         return this.ruleService.getAllRules();
     }
