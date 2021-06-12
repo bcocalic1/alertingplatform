@@ -9,12 +9,10 @@ import java.util.*;
 public class CPURule extends Rule {
     private static final int numberOfMeasurements = 50;
     private Queue<CPUMeasurement> recentMeasurements;
-    private int inARow;
     private int counter;
     public CPURule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("inARow")int inARow) {
-        super(name, service, severity, limit, 0.0, "N/A");
+        super(name, service, severity, limit, 0.0, "N/A", inARow);
         recentMeasurements = new LinkedList<>();
-        this.inARow = inARow;
         this.counter = 0;
     }
 
@@ -45,13 +43,12 @@ public class CPURule extends Rule {
         Queue<CPUMeasurement> temp = this.recentMeasurements;
         while(!temp.isEmpty()){
             if(followsRule(temp.poll())){
-                this.recentMeasurements.clear();
                 counter = 0;
                 return false;
             }
             counter++;
         }
-        if(counter >= this.inARow){
+        if(counter >= this.getInARow()){
             return true;
         }
         return false;

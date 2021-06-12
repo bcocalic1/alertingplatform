@@ -15,14 +15,16 @@ public abstract class Rule {
     private Double timePeriod;
     private String timeUnit;
     private String severity;
+    private int inARow;
 
-    public Rule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit) {
+    public Rule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
         this.name = name;
         this.service = service;
         this.limit = limit;
         this.timePeriod = timePeriod;
         this.timeUnit = timeUnit;
         this.severity = severity;
+        this.inARow = inARow;
     }
 
     public String getName() {
@@ -71,5 +73,9 @@ public abstract class Rule {
 
     public String getSeverity() {
         return severity;
+    }
+
+    public int getInARow() {
+        return inARow;
     }
 }
