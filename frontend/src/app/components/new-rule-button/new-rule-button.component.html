@@ -11,49 +11,41 @@
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form action="" (ngSubmit)="submitRule()">
             <div class="form-group">
                 <label for="ruleName" class="label">Name:</label>
                 <div class="input-group marginal">
-                    <input id="ruleName" class="form-control label" placeholder="Enter name...">
+                    <input name="ruleName" [(ngModel)]="ruleName" class="form-control label" placeholder="Enter name...">
                 </div>
                 <label for="service" class="label">Service:</label>
                 <div class="input-group marginal">
-                    <select name="service" id="service" class="dropdown">
-                        <option value="cpu">CPU</option>
-                        <option value="alerting">Alerting</option>
-                        <option value="temperature">Temperature</option>
-                        <option value="userManagement">User Management</option>
+                    <select name="service" (ngModelChange)="selectService($event)"  [(ngModel)]="selectedService" class="dropdown">
+                        <option [value]="item.value" *ngFor="let item of services">{{item.name}}</option>
                     </select>
                 </div>
                 <label for="severity" class="label">Severity:</label>
                 <div class="input-group marginal">
-                    <select name="severity" id="severity" class="dropdown">
-                        <option value="critical">Critical</option>
-                        <option value="temperature">High</option>
-                        <option value="userManagement">Normal</option>
-                        <option value="low">Low</option>
+                    <select name="severity" (ngModelChange)="selectSeverity($event)"  [(ngModel)]="selectedSeverity" class="dropdown">
+                        <option [value]="severity.value" *ngFor="let severity of severities">{{severity.name}}</option>
                     </select>
                 </div>
                 <label for="rule" class="label">Rule:</label>
                 <div class="input-group marginal">
-                    <select name="ruleType" id="ruleType" class="ruleType">
-                        <option value="errorLogs">Error logs</option>
-                        <option value="temperature">Temperature</option>
+                    <select name="ruleType" (ngModelChange)="selectType($event)"  [(ngModel)]="selectedType" class="ruleType">
+                        <option [value]="type.value" *ngFor="let type of types">{{type.name}}</option>
                     </select>
                     <span class='ruleText'>more than</span>
-                    <input type="text" id="ruleNumber" class="ruleNumber">
+                    <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber">
                     <span class="ruleTextTwo">in</span>
-                    <input type="text" id="ruleNumberTwo" class="ruleNumberTwo">
-                    <select name="ruleMetrics" id="ruleMetrics" class="ruleMetrics">
-                        <option value="minute">minutes</option>
-                        <option value="second">seconds</option>
+                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo">
+                    <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics">
+                        <option [value]="unit.value" *ngFor="let unit of timeUnits">{{unit.name}}</option>
                     </select>
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="modal.close('Save click')">Create Rule</button>
+        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Create Rule</button>
     </div>
 </ng-template>
