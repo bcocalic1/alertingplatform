@@ -11,6 +11,7 @@ import { NewRuleButtonComponent } from './components/new-rule-button/new-rule-bu
 import { RuleCardComponent } from './components/rule-card/rule-card.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { FormsModule } from '@angular/forms';
     AppRoutingModule,
     NgbModule,
     FormsModule,
+    HttpClientModule,
   ],
   providers: [BodyComponent],
   bootstrap: [AppComponent]
