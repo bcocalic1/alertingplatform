@@ -17,12 +17,16 @@ public class RuleService {
         this.rulesDao = rulesDao;
     }
 
-    public void addRule(Rule rule){
+    public void addRule(@Qualifier("rules")Rule rule){
         rulesDao.addRule(rule);
     }
 
     public Rule getCPURule(){
         return rulesDao.getCPURule();
+    }
+
+    public Rule getUserRule(){
+        return rulesDao.getUserRule();
     }
 
     public List<Rule> getAllRules(){

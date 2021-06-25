@@ -9,8 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 @Repository("rules")
-public class RulesDao {
-    private Map<String, Rule> rules;
+public class RulesDao{
+    private final Map<String, Rule> rules;
 
     public RulesDao() {
         this.rules = new HashMap<>();
@@ -26,7 +26,10 @@ public class RulesDao {
 
     public List<Rule> getAllRules(){
         List<Rule> rulesList = new ArrayList<>(this.rules.values());
-
         return rulesList;
+    }
+
+    public Rule getUserRule() {
+        return rules.get("users");
     }
 }

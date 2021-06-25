@@ -1,4 +1,4 @@
-package com.example.alerting_mikroservis;
+package com.example.alerting_mikroservis.microservice_classes;
 
 import java.util.ArrayList;
 import java.util.List;

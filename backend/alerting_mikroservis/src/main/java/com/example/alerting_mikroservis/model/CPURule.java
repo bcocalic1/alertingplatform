@@ -1,6 +1,6 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.CPUMeasurement;
+import com.example.alerting_mikroservis.microservice_classes.CPUMeasurement;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.*;
@@ -10,8 +10,8 @@ public class CPURule extends Rule {
     private static final int numberOfMeasurements = 50;
     private Queue<CPUMeasurement> recentMeasurements;
     private int counter;
-    public CPURule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("inARow")int inARow) {
-        super(name, service, severity, limit, 0.0, "N/A", inARow);
+    public CPURule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
+        super(name, service, severity, limit, null, null, inARow);
         recentMeasurements = new LinkedList<>();
         this.counter = 0;
     }

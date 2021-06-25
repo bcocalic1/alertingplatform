@@ -26,10 +26,4 @@ public class MeasurementController {
         CPUMeasurement response = restTemplate.postForObject("http://localhost:8080/api/v1/cpu", request, CPUMeasurement.class);
         System.out.println(response);
     }
-
-    @GetMapping("/get")
-    public CPUMeasurement getMeasurements(){
-        int last = measurementService.getMeasurements().size() - 1;
-        return measurementService.getMeasurements().get(last);
-    }
 }
