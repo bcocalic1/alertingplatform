@@ -33,11 +33,11 @@ public class UserRule extends Rule{
             this.recentEvents.poll();
         }
         this.recentEvents.add(event);
-        System.out.println(event.getReason());
         if(followsRule(event)) return false;
         Queue<Event> temp = this.recentEvents;
         while(!temp.isEmpty()){
-            if(temp.poll().getUserId().equals(event.getUserId()) && !followsRule(temp.poll())){
+            Event e = temp.poll();
+            if(e.getUserId().equals(event.getUserId()) && !followsRule(e)){
                 counter++;
             }else{
                 return false;

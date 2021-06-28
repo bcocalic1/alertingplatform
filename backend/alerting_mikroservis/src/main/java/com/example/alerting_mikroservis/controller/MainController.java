@@ -44,6 +44,7 @@ public class MainController {
     @PostMapping("/users")
     public void getLoginInfo(@RequestBody Event event){
         UserRule rule = (UserRule) ruleService.getUserRule();
+
         if(Objects.isNull(rule)){
             System.out.println("No rule added for users");
             return;

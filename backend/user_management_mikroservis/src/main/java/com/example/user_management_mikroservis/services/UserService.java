@@ -22,7 +22,6 @@ public class UserService {
     }
 
     public String login(String email, String password){
-        System.out.println("login u service");
         return this.userDao.login(email, password);
     }
 

@@ -24,9 +24,7 @@ public class UserDao {
     }
 
     public String login(String email, String password){
-        System.out.println("Prije get by email");
         User userDB = this.getUserByEmail(email);
-        System.out.println("Poslije get by email");
         if(Objects.isNull(userDB)) return "User doesn't exist";
         if(!userDB.getPassword().equals(password)) return "Wrong password";
         return "OK";

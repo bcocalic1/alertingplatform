@@ -23,11 +23,9 @@ public class UserController {
     @PostMapping("/login")
     public void login(@RequestBody User user) throws Exception {
         String login = this.userService.login(user.getEmail(), user.getPassword());
-        System.out.println("login controller");
         if(login.equals("User doesn't exist")) {
             throw new Exception(login);
         }else {
-            System.out.println("else login controller");
             Event event = new Event(user.getUserId(), login);
             RestTemplate restTemplate = new RestTemplate();
             HttpEntity<Event> request = new HttpEntity<>(event);
