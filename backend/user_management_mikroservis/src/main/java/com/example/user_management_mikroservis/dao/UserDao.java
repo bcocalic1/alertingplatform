@@ -23,11 +23,11 @@ public class UserDao {
         this.users.add(user);
     }
 
-    public String login(String email, String password){
+    public boolean login(String email, String password){
         User userDB = this.getUserByEmail(email);
-        if(Objects.isNull(userDB)) return "User doesn't exist";
-        if(!userDB.getPassword().equals(password)) return "Wrong password";
-        return "OK";
+        if(Objects.isNull(userDB)) throw  new RuntimeException("User doesn't exist") ;
+        if(!userDB.getPassword().equals(password)) return false;
+        return true;
     }
 
     public User getUserByEmail(String email){

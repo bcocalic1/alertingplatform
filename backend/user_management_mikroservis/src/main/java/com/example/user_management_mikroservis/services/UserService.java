@@ -21,7 +21,7 @@ public class UserService {
         this.userDao.registerUser(user);
     }
 
-    public String login(String email, String password){
+    public boolean login(String email, String password){
         return this.userDao.login(email, password);
     }
 

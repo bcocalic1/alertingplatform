@@ -1,17 +1,16 @@
 package com.example.user_management_mikroservis.model;
 
-import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.UUID;
 
 public class Event {
     private Timestamp time;
     private UUID userId;
-    private String reason;
+    private boolean successfulLogin;
 
-    public Event(UUID userId, String reason) {
+    public Event(UUID userId, boolean successfulLogin) {
         this.userId = userId;
-        this.reason = reason;
+        this.successfulLogin = successfulLogin;
         this.time = new Timestamp(System.currentTimeMillis());
     }
 
@@ -23,12 +22,12 @@ public class Event {
         this.time = time;
     }
 
-    public String getReason() {
-        return reason;
+    public boolean isSuccessfulLogin() {
+        return successfulLogin;
     }
 
-    public void setReason(String reason) {
-        this.reason = reason;
+    public void setSuccessfulLogin(boolean successfulLogin) {
+        this.successfulLogin = successfulLogin;
     }
 
     public UUID getUserId() {
