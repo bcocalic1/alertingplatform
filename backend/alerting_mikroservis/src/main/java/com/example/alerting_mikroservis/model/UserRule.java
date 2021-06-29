@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.UUID;
 
 public class UserRule extends Rule{
 
@@ -23,9 +24,25 @@ public class UserRule extends Rule{
         return "Greska pri loginu vise od " + this.getInARow() + " puta";
     }
 
-    private boolean followsRule(Event event){
-        if(event.getReason().equals("OK")) return true;
-        else return false;
+    private void cleanUpAfterUser(UUID userId){
+        this.reverseRecentEvents();
+        Queue<Event> temp = this.recentEvents;
+        this.recentEvents.clear();
+        while(!temp.isEmpty()){
+            Event event = temp.poll();
+            if(!event.getUserId().equals(userId)){
+                this.recentEvents.add(event);
+            }
+        }
+
+    }
+
+    private void reverseRecentEvents(){
+        Queue<Event> temp = this.recentEvents;
+        this.recentEvents.clear();
+        while(!temp.isEmpty()){
+            this.recentEvents.add(temp.poll());
+        }
     }
 
     public boolean sendAlert(Event event){
@@ -33,16 +50,20 @@ public class UserRule extends Rule{
             this.recentEvents.poll();
         }
         this.recentEvents.add(event);
-        if(followsRule(event)) return false;
+        if(event.isSuccessfulLogin()) return false;
         Queue<Event> temp = this.recentEvents;
         while(!temp.isEmpty()){
             Event e = temp.poll();
-            if(e.getUserId().equals(event.getUserId()) && !followsRule(e)){
+            if(e.getUserId().equals(event.getUserId()) && !e.isSuccessfulLogin()){
                 counter++;
             }else{
                 return false;
             }
-            if(counter >= this.getInARow()) return true;
+            if(counter >= this.getInARow()){
+                this.cleanUpAfterUser(event.getUserId());
+                counter = 0;
+                return true;
+            }
         }
         return false;
     }

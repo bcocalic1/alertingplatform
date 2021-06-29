@@ -22,17 +22,12 @@ public class UserController {
 
     @PostMapping("/login")
     public void login(@RequestBody User user) throws Exception {
-        String login = this.userService.login(user.getEmail(), user.getPassword());
-        if(login.equals("User doesn't exist")) {
-            throw new Exception(login);
-        }else {
-            Event event = new Event(user.getUserId(), login);
-            RestTemplate restTemplate = new RestTemplate();
-            HttpEntity<Event> request = new HttpEntity<>(event);
-            Event response = restTemplate.postForObject("http://localhost:8080/api/v1/users", request, Event.class);
-            System.out.println(response);
-            System.out.println(event.getReason());
-        }
+        boolean successfulLogin = this.userService.login(user.getEmail(), user.getPassword());
+        Event event = new Event(user.getUserId(), successfulLogin);
+        RestTemplate restTemplate = new RestTemplate();
+        HttpEntity<Event> request = new HttpEntity<>(event);
+        Event response = restTemplate.postForObject("http://localhost:8080/api/v1/users", request, Event.class);
+        System.out.println(response);
     }
 
     @PostMapping("/register")
