@@ -31,14 +31,16 @@
                 </div>
                 <label for="rule" class="label">Rule:</label>
                 <div class="input-group marginal">
-                    <select name="ruleType" (ngModelChange)="selectType($event)"  [(ngModel)]="selectedType" class="ruleType">
+                    <!-- <select name="ruleType" (ngModelChange)="selectType($event)"  [(ngModel)]="selectedType" class="ruleType">
                         <option [value]="type.value" *ngFor="let type of types">{{type.name}}</option>
-                    </select>
-                    <span class='ruleText'>more than</span>
-                    <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber">
-                    <span class="ruleTextTwo">in</span>
-                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo">
-                    <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics">
+                    </select> -->
+                    <!-- <span>Wrong measurements</span> -->
+                    <span class='ruleText marginal'>More than</span>
+                    <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber marginal">
+                    <p class="ruleType marginal">wrong measurements</p>
+                    <span class="ruleTextTwo marginal">in</span>
+                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo marginal">
+                    <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics marginal">
                         <option [value]="unit.value" *ngFor="let unit of timeUnits">{{unit.name}}</option>
                     </select>
                 </div>
