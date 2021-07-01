@@ -57,13 +57,6 @@ export class NewRuleButtonComponent implements OnInit {
   
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.ruleService.createRule(new Rule(this.ruleName, 
-      this.service, this.severity, this.limit, 
-      this.timePeriod, this.timeUnit, 5, this.service)).subscribe(
-      data => {
-        console.log(data);
-      }
-    );
     // console.log(this.ruleName);
     // console.log(this.service);
     // console.log(this.severity);
@@ -88,6 +81,14 @@ export class NewRuleButtonComponent implements OnInit {
 
   submitRule(){
     console.log(this.ruleName);
+    this.ruleService.createRule(new Rule(this.ruleName, 
+      this.service, this.severity, this.limit, 
+      this.timePeriod, this.timeUnit, 5, this.service)).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    this.modalService.dismissAll();
   }
 
   selectService(id: number) {

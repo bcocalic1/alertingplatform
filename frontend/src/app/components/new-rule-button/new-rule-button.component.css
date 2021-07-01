@@ -148,3 +148,7 @@
     margin-bottom: 5px;
     margin-left: 1px;
 }
+
+.ng-invalid:not(form) {
+    border-bottom: 1px solid red;
+}

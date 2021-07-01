@@ -11,43 +11,42 @@
         </button>
     </div>
     <div class="modal-body">
-        <form action="" (ngSubmit)="submitRule()">
+        <form action="" (ngSubmit)="submitRule()" #ruleForm="ngForm">
             <div class="form-group">
                 <label for="ruleName" class="label">Name:</label>
                 <div class="input-group marginal">
-                    <input name="ruleName" [(ngModel)]="ruleName" class="form-control label" placeholder="Enter name...">
+                    <input name="ruleName" [(ngModel)]="ruleName" class="form-control label" placeholder="Enter name..." required="required" >
                 </div>
                 <label for="service" class="label">Service:</label>
                 <div class="input-group marginal">
-                    <select name="service" (ngModelChange)="selectService($event)"  [(ngModel)]="selectedService" class="dropdown">
+                    <select name="service" (ngModelChange)="selectService($event)"  [(ngModel)]="selectedService" class="dropdown" required="required">
                         <option [value]="item.value" *ngFor="let item of services">{{item.name}}</option>
                     </select>
                 </div>
                 <label for="severity" class="label">Severity:</label>
                 <div class="input-group marginal">
-                    <select name="severity" (ngModelChange)="selectSeverity($event)"  [(ngModel)]="selectedSeverity" class="dropdown">
+                    <select name="severity" (ngModelChange)="selectSeverity($event)"  [(ngModel)]="selectedSeverity" class="dropdown" required="required">
                         <option [value]="severity.value" *ngFor="let severity of severities">{{severity.name}}</option>
                     </select>
                 </div>
                 <label for="rule" class="label">Rule:</label>
                 <div class="input-group marginal">
-                    <!-- <select name="ruleType" (ngModelChange)="selectType($event)"  [(ngModel)]="selectedType" class="ruleType">
-                        <option [value]="type.value" *ngFor="let type of types">{{type.name}}</option>
-                    </select> -->
-                    <!-- <span>Wrong measurements</span> -->
                     <span class='ruleText marginal'>More than</span>
-                    <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber marginal">
+                    <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber marginal" required="required">
                     <p class="ruleType marginal">wrong measurements</p>
                     <span class="ruleTextTwo marginal">in</span>
-                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo marginal">
-                    <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics marginal">
+                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo marginal" required="required">
+                    <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics marginal" required="required">
                         <option [value]="unit.value" *ngFor="let unit of timeUnits">{{unit.name}}</option>
                     </select>
                 </div>
             </div>
         </form>
     </div>
+    <div *ngIf="ruleForm.dirty && ruleForm.invalid">
+       
+    </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-dark" (click)="modal.close('Save click')">Create Rule</button>
+        <button type="submit" class="btn btn-outline-dark" (click)=" !ruleForm.invalid && submitRule()">Create Rule</button>
     </div>
 </ng-template>
