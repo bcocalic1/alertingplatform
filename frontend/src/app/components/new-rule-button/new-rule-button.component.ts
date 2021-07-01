@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ModalDismissReasons, NgbModal} from '@ng-bootstrap/ng-bootstrap';
 import { RuleServiceService } from 'src/app/service/rule-service.service';
-import { Rule } from '../rule-card/rule-card.component';
+import { Rule, RuleCardComponent } from '../rule-card/rule-card.component';
 
 @Component({
   selector: 'app-new-rule-button',
@@ -48,7 +48,8 @@ export class NewRuleButtonComponent implements OnInit {
 
   constructor(
     private modalService: NgbModal,
-    private ruleService: RuleServiceService
+    private ruleService: RuleServiceService,
+   // public ruleCard: RuleCardComponent,
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +57,9 @@ export class NewRuleButtonComponent implements OnInit {
   
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    this.ruleService.createRule(new Rule(this.ruleName, this.service, this.severity, this.limit, this.timePeriod, this.timeUnit, 5)).subscribe(
+    this.ruleService.createRule(new Rule(this.ruleName, 
+      this.service, this.severity, this.limit, 
+      this.timePeriod, this.timeUnit, 5, this.service)).subscribe(
       data => {
         console.log(data);
       }

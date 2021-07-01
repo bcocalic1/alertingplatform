@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { RuleServiceService } from 'src/app/service/rule-service.service';
 
 export class Rule {
   constructor(
@@ -9,7 +10,13 @@ export class Rule {
     public timePeriod: number,
     public timeUnit: string,
     public inARow: number,
+    public type: string,
   ) { }
+
+  public getDescription() : string {
+    return `More than ${this.limit} wrong measurements`
+    // ${this.timePeriod} ${this.timeUnit}`;
+  }
 }
 
 @Component({
@@ -19,9 +26,23 @@ export class Rule {
 })
 export class RuleCardComponent implements OnInit {
 
-  constructor() { }
+  rules !: Rule[];
+
+  constructor(
+    private ruleService: RuleServiceService,
+  ) { }
 
   ngOnInit(): void {
+    this.refreshRules();
+  }
+
+  refreshRules() {
+    this.ruleService.retrieveAllRules().subscribe(
+      response => {
+        console.log(response);
+        this.rules = response;
+      }
+    )
   }
 
 }

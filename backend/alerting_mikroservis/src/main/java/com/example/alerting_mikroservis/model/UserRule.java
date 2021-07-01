@@ -13,8 +13,8 @@ public class UserRule extends Rule{
     private Queue<Event> recentEvents;
     private int counter;
 
-    public UserRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
-        super(name, service, severity, null, null, null, inARow);
+    public UserRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
+        super(name, service, severity, limit, timePeriod, timeUnit, inARow);
         recentEvents = new LinkedList<>();
         this.counter = 0;
     }
