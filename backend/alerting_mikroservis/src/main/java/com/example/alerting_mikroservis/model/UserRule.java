@@ -26,7 +26,7 @@ public class UserRule extends Rule{
 
     private void cleanUpAfterUser(UUID userId){
         this.reverseRecentEvents();
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             Event event = temp.poll();
@@ -34,11 +34,10 @@ public class UserRule extends Rule{
                 this.recentEvents.add(event);
             }
         }
-
     }
 
     private void reverseRecentEvents(){
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             this.recentEvents.add(temp.poll());
@@ -51,12 +50,13 @@ public class UserRule extends Rule{
         }
         this.recentEvents.add(event);
         if(event.isSuccessfulLogin()) return false;
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
+        System.out.println(temp.size());
         while(!temp.isEmpty()){
             Event e = temp.poll();
             if(e.getUserId().equals(event.getUserId()) && !e.isSuccessfulLogin()){
                 counter++;
-            }else{
+            }else if(e.getUserId().equals(event.getUserId()) && e.isSuccessfulLogin()){
                 return false;
             }
             if(counter >= this.getInARow()){
