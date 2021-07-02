@@ -1,6 +1,6 @@
 package com.example.user_management_mikroservis.services;
 
-import com.example.user_management_mikroservis.dao.UserDao;
+import com.example.user_management_mikroservis.dao.UserRepository;
 import com.example.user_management_mikroservis.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,22 +10,24 @@ import java.util.List;
 
 @Service
 public class UserService {
-    private final UserDao userDao;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserService(@Qualifier("user") UserDao userDao) {
-        this.userDao = userDao;
+    public UserService(@Qualifier("users") UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
-    public void register(User user) throws Exception {
-        this.userDao.registerUser(user);
+   public void register(User user) throws Exception {
+        this.userRepository.save(user);
     }
 
     public boolean login(String email, String password){
-        return this.userDao.login(email, password);
+        User user = this.userRepository.findByEmailAddress(email);
+        if(user.getPassword().equals(password)) return true;
+        return false;
     }
 
     public List<User> getAll(){
-        return this.userDao.getAll();
+        return userRepository.findAll();
     }
 }

@@ -1,13 +1,23 @@
 package com.example.user_management_mikroservis.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.GenericGenerator;
 
+import javax.persistence.*;
 import java.util.UUID;
 
+@Entity
+@Table(name = "users")
 public class User {
+    @Id
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+    @Column(name = "user_id", updatable = false, nullable = false)
     UUID userId;
     String email;
     String password;
+
+    protected User(){}
 
     public User(@JsonProperty("email")String email, @JsonProperty("password")String password) {
         this.userId = UUID.randomUUID();
@@ -17,10 +27,6 @@ public class User {
 
     public UUID getUserId() {
         return userId;
-    }
-
-    public void setUserId(UUID userId) {
-        this.userId = userId;
     }
 
     public String getEmail() {
