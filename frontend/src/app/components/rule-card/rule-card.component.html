@@ -1,16 +1,16 @@
-<div class="card">
-    <p class="rule-title">RULE #1</p>
+<div class="card" *ngFor="let rule of rules">
+    <p class="rule-title">{{rule.name.toUpperCase()}}</p>
     <p>
         <span class="rule-properties">
-            <span class="bold">Service: </span> File service
+            <span class="bold">Service: </span> {{rule.service}}
         </span> 
 
         <span class="rule-properties">
-            <span class="bold">Severity: </span> <span class="critical">CRITICAL</span> 
+            <span class="bold">Severity: </span> <span class="critical">{{rule.severity}}</span> 
         </span> 
 
         <span class="rule-properties">
-            <span class="bold">Description: </span> More than 5 unprocessed files in one minute!
+            <span class="bold">Description: </span> More than {{rule.limit}} wrong measurements in {{rule.timePeriod}} {{rule.timeUnit}}
         </span>
     </p>
     <div class="rule-modifiers">

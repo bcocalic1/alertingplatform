@@ -10,7 +10,6 @@ import com.example.alerting_mikroservis.service.AlertService;
 import com.example.alerting_mikroservis.service.RuleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.util.List;
 import java.util.Objects;
