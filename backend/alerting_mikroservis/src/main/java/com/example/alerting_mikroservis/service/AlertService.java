@@ -1,6 +1,6 @@
 package com.example.alerting_mikroservis.service;
 
-import com.example.alerting_mikroservis.dao.AlertDao;
+import com.example.alerting_mikroservis.dao.AlertRepository;
 import com.example.alerting_mikroservis.model.Alert;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -10,26 +10,27 @@ import java.util.List;
 
 @Service
 public class AlertService {
-    private final AlertDao alertDao;
+
+    private final AlertRepository alertRepository;
 
     @Autowired
-    public AlertService(@Qualifier("alerts")AlertDao alertDao) {
-        this.alertDao = alertDao;
+    public AlertService(@Qualifier("alerts") AlertRepository alertRepository) {
+        this.alertRepository = alertRepository;
     }
 
     public void addAlert(Alert alert){
-        this.alertDao.addAlert(alert);
+        this.alertRepository.save(alert);
     }
 
     public List<Alert> getAlerts(){
-        return alertDao.getAlerts();
+        return this.alertRepository.findAll();
     }
 
     public List<Alert> getAlertsBySeverity(String severity){
-        return alertDao.getAlertsBySeverity(severity);
+        return this.alertRepository.findBySeverity(severity);
     }
 
     public List<Alert> getAlertsByService(String service){
-        return alertDao.getAlertsByService(service);
+        return this.alertRepository.findByService(service);
     }
 }

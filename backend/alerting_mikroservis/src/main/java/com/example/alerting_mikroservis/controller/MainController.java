@@ -23,14 +23,14 @@ public class MainController {
     private final AlertService alertService;
 
     @Autowired
-    public MainController(@RequestBody RuleService ruleService, @RequestBody AlertService alertService) {
+    public MainController(RuleService ruleService, AlertService alertService) {
         this.ruleService = ruleService;
         this.alertService = alertService;
     }
 
     @PostMapping("/cpu")
     public void getCPUMeasurement(@RequestBody CPUMeasurement measurement){
-        CPURule rule = (CPURule) ruleService.getCPURule();
+        CPURule rule = (CPURule) ruleService.getRuleByService("CPU");
         if(Objects.isNull(rule)){
             System.out.println("No rule added for CPU");
             return;
@@ -43,8 +43,7 @@ public class MainController {
 
     @PostMapping("/users")
     public void getLoginInfo(@RequestBody Event event){
-        UserRule rule = (UserRule) ruleService.getUserRule();
-
+        UserRule rule = (UserRule) ruleService.getRuleByService("users");
         if(Objects.isNull(rule)){
             System.out.println("No rule added for users");
             return;
@@ -79,6 +78,11 @@ public class MainController {
     @GetMapping("/alerts/service")
     public List<Alert> getAlertsByService(@RequestBody String service){
         return alertService.getAlertsByService(service);
+    }
+
+    @PutMapping("/rules")
+    public void updateRule(@RequestBody Rule rule){
+        this.ruleService.updateRule(rule);
     }
 
 }
