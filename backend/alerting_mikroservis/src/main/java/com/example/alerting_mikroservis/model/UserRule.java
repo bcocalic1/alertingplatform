@@ -13,7 +13,7 @@ public class UserRule extends Rule{
     private Queue<Event> recentEvents;
     private int counter;
 
-    public UserRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
+    public UserRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, null, null, null, inARow);
         recentEvents = new LinkedList<>();
         this.counter = 0;
@@ -26,7 +26,7 @@ public class UserRule extends Rule{
 
     private void cleanUpAfterUser(UUID userId){
         this.reverseRecentEvents();
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             Event event = temp.poll();
@@ -34,11 +34,10 @@ public class UserRule extends Rule{
                 this.recentEvents.add(event);
             }
         }
-
     }
 
     private void reverseRecentEvents(){
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             this.recentEvents.add(temp.poll());
@@ -51,12 +50,13 @@ public class UserRule extends Rule{
         }
         this.recentEvents.add(event);
         if(event.isSuccessfulLogin()) return false;
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
+        System.out.println(temp.size());
         while(!temp.isEmpty()){
             Event e = temp.poll();
             if(e.getUserId().equals(event.getUserId()) && !e.isSuccessfulLogin()){
                 counter++;
-            }else{
+            }else if(e.getUserId().equals(event.getUserId()) && e.isSuccessfulLogin()){
                 return false;
             }
             if(counter >= this.getInARow()){

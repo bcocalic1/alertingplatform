@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CPURule.class, name = "CPU"),
-        @JsonSubTypes.Type(value = UserRule.class, name = "users")
+        @JsonSubTypes.Type(value = UserRule.class, name = "User management")
 })
 public abstract class Rule {
     private String name;
@@ -18,7 +18,7 @@ public abstract class Rule {
     private String severity;
     private int inARow;
 
-    public Rule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
+    public Rule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         this.name = name;
         this.service = service;
         this.limit = limit;

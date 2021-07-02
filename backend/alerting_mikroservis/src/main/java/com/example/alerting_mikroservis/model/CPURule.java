@@ -10,7 +10,7 @@ public class CPURule extends Rule {
     private static final int numberOfMeasurements = 50;
     private Queue<CPUMeasurement> recentMeasurements;
     private int counter;
-    public CPURule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("time_period") Double timePeriod, @JsonProperty("time_unit") String timeUnit, @JsonProperty("inARow") int inARow) {
+    public CPURule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, limit, null, null, inARow);
         recentMeasurements = new LinkedList<>();
         this.counter = 0;

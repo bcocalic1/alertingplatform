@@ -13,4 +13,8 @@ export class RuleServiceService {
   createRule(rule: Rule){
     return this.http.post(`http://localhost:8080/api/v1/rules`, rule);
   }
+
+  retrieveAllRules(){
+    return this.http.get<Rule[]>(`http://localhost:8080/api/v1/rules`);
+  }
 }
