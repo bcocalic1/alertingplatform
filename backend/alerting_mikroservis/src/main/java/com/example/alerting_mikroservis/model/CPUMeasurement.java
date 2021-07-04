@@ -1,4 +1,4 @@
-package com.example.cpu_mikroservis.model;
+package com.example.alerting_mikroservis.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

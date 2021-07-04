@@ -1,6 +1,5 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.microservice_classes.CPUMeasurement;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 

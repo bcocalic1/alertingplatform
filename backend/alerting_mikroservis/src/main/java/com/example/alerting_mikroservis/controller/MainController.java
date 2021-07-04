@@ -1,7 +1,7 @@
 package com.example.alerting_mikroservis.controller;
 
-import com.example.alerting_mikroservis.microservice_classes.CPUMeasurement;
-import com.example.alerting_mikroservis.microservice_classes.Event;
+import com.example.alerting_mikroservis.model.CPUMeasurement;
+import com.example.alerting_mikroservis.model.Event;
 import com.example.alerting_mikroservis.model.Alert;
 import com.example.alerting_mikroservis.model.CPURule;
 import com.example.alerting_mikroservis.model.Rule;

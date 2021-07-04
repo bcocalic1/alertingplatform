@@ -1,12 +1,9 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.microservice_classes.Event;
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
-import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.util.LinkedList;
 import java.util.Queue;

@@ -24,6 +24,7 @@ public class UserController {
     public void login(@RequestBody User user) throws Exception {
         boolean successfulLogin = this.userService.login(user.getEmail(), user.getPassword());
         Event event = new Event(user.getUserId(), successfulLogin);
+
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<Event> request = new HttpEntity<>(event);
         Event response = restTemplate.postForObject("http://localhost:8080/api/v1/users", request, Event.class);
