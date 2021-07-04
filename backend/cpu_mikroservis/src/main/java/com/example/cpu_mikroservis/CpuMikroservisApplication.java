@@ -1,6 +1,6 @@
 package com.example.cpu_mikroservis;
 
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
+
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

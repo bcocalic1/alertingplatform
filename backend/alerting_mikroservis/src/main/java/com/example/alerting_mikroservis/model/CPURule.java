@@ -11,24 +11,19 @@ import java.util.*;
 @Entity
 @DiscriminatorValue("cpu")
 public class CPURule extends Rule {
-    @JsonInclude()
     @Transient
     private static final int numberOfMeasurements = 50;
 
-    @JsonInclude()
     @Transient
-    private Queue<CPUMeasurement> recentMeasurements;
+    private static final Queue<CPUMeasurement> recentMeasurements = new LinkedList<>();
 
-    @JsonInclude()
     @Transient
-    private int counter;
+    private static int counter = 0;
 
     public CPURule(){}
 
     public CPURule(@JsonProperty("limit") Double limit, @JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, limit, null, null, inARow);
-        recentMeasurements = new LinkedList<>();
-        this.counter = 0;
     }
 
     @Override

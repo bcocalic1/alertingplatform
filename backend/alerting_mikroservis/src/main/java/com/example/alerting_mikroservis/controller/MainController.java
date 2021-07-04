@@ -35,8 +35,8 @@ public class MainController {
             return;
         }
         if(rule.sendAlert(measurement)){
-           Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-           alertService.addAlert(alert);
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
         }
     }
 
