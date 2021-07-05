@@ -2,10 +2,9 @@ package com.example.alerting_mikroservis.controller;
 
 import com.example.alerting_mikroservis.microservice_classes.CPUMeasurement;
 import com.example.alerting_mikroservis.microservice_classes.Event;
-import com.example.alerting_mikroservis.model.Alert;
-import com.example.alerting_mikroservis.model.CPURule;
-import com.example.alerting_mikroservis.model.Rule;
-import com.example.alerting_mikroservis.model.UserRule;
+import com.example.alerting_mikroservis.microservice_classes.Temperature;
+import com.example.alerting_mikroservis.microservice_classes.File;
+import com.example.alerting_mikroservis.model.*;
 import com.example.alerting_mikroservis.service.AlertService;
 import com.example.alerting_mikroservis.service.RuleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,6 +49,32 @@ public class MainController {
         }
 
         if(rule.sendAlert(event)){
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+
+    @PostMapping("/temperature")
+    public void getTemperatureMeasurement(@RequestBody Temperature measurement){
+        TemperatureRule rule = (TemperatureRule) ruleService.getTemperatureRule();
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for Temperature");
+            return;
+        }
+        if(rule.sendAlert(measurement)){
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+
+    @PostMapping("/file")
+    public void getFileLOgs(@RequestBody File log){
+        FileRule rule = (FileRule) ruleService.getFileRule();
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for Files");
+            return;
+        }
+        if(rule.sendAlert(log)){
             Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
             alertService.addAlert(alert);
         }

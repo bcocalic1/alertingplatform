@@ -29,6 +29,14 @@ public class RuleService {
         return rulesDao.getUserRule();
     }
 
+    public Rule getTemperatureRule(){
+        return rulesDao.getTemperatureRule();
+    }
+
+    public Rule getFileRule(){
+        return rulesDao.getFileRule();
+    }
+
     public List<Rule> getAllRules(){
         return rulesDao.getAllRules();
     }
