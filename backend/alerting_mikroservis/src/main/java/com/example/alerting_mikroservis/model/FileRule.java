@@ -13,7 +13,7 @@ public class FileRule extends Rule {
     private int counter;
 
     public FileRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
-        super(name, service, severity, limit, null, null, inARow);
+        super(name, service, severity, null, null, null, inARow);
         recentLogs = new LinkedList<>();
         this.counter = 0;
     }
