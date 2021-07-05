@@ -27,4 +27,16 @@ public class CPUMeasurement {
     public List<Double> getMeasurement() {
         return measurement;
     }
+
+    public static Double getMin() {
+        return min;
+    }
+
+    public static Double getMax() {
+        return max;
+    }
+
+    public Integer getNumberOfProcessors() {
+        return numberOfProcessors;
+    }
 }
