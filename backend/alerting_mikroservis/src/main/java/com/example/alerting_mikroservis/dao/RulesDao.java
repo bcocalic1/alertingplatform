@@ -32,4 +32,11 @@ public class RulesDao{
     public Rule getUserRule() {
         return rules.get("users");
     }
+
+    public Rule getTemperatureRule() {
+        return rules.get("Temperature");
+    }
+    public Rule getFileRule() {
+        return rules.get("File");
+    }
 }

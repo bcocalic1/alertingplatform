@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CPURule.class, name = "CPU"),
-        @JsonSubTypes.Type(value = UserRule.class, name = "User management")
+        @JsonSubTypes.Type(value = TemperatureRule.class, name = "Temperature"),
+        @JsonSubTypes.Type(value = UserRule.class, name = "User management"),
+        @JsonSubTypes.Type(value = FileRule.class, name = "File")
 })
 public abstract class Rule {
     private String name;
