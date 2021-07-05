@@ -50,7 +50,7 @@ public class CPURule extends Rule {
         }
         this.recentMeasurements.add(measurement);
 
-        Queue<CPUMeasurement> temp = this.recentMeasurements;
+        Queue<CPUMeasurement> temp = new LinkedList<>(this.recentMeasurements);
         while(!temp.isEmpty()){
             if(followsRule(temp.poll())){
                 counter = 0;

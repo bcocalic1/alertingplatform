@@ -5,9 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
-import java.util.LinkedList;
-import java.util.Queue;
-import java.util.UUID;
+import java.util.*;
 
 @Entity
 @DiscriminatorValue("users")
@@ -38,7 +36,7 @@ public class UserRule extends Rule{
 
     private void cleanUpAfterUser(UUID userId){
         this.reverseRecentEvents();
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             Event event = temp.poll();
@@ -50,7 +48,7 @@ public class UserRule extends Rule{
     }
 
     private void reverseRecentEvents(){
-        Queue<Event> temp = this.recentEvents;
+        Queue<Event> temp = new LinkedList<>(this.recentEvents);
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             this.recentEvents.add(temp.poll());
