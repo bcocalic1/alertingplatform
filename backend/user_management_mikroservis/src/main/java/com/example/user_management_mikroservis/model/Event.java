@@ -1,9 +1,10 @@
 package com.example.user_management_mikroservis.model;
 
+import java.io.Serializable;
 import java.sql.Timestamp;
 import java.util.UUID;
 
-public class Event {
+public class Event implements Serializable {
     private Timestamp time;
     private UUID userId;
     private boolean successfulLogin;

@@ -1,22 +1,34 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.microservice_classes.Event;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.UUID;
 
+@Entity
+@DiscriminatorValue("users")
 public class UserRule extends Rule{
 
+
+    @Transient
     private static final int numberOfEvents = 50;
-    private Queue<Event> recentEvents;
-    private int counter;
+
+
+    @Transient
+    private static final Queue<Event> recentEvents = new LinkedList<>();;
+
+
+    @Transient
+    private static int counter = 0;
+
+    public UserRule(){}
 
     public UserRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, null, null, null, inARow);
-        recentEvents = new LinkedList<>();
-        this.counter = 0;
     }
 
     @Override
@@ -26,7 +38,7 @@ public class UserRule extends Rule{
 
     private void cleanUpAfterUser(UUID userId){
         this.reverseRecentEvents();
-        Queue<Event> temp = new LinkedList<>(this.recentEvents);
+        Queue<Event> temp = this.recentEvents;
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             Event event = temp.poll();
@@ -34,10 +46,11 @@ public class UserRule extends Rule{
                 this.recentEvents.add(event);
             }
         }
+
     }
 
     private void reverseRecentEvents(){
-        Queue<Event> temp = new LinkedList<>(this.recentEvents);
+        Queue<Event> temp = this.recentEvents;
         this.recentEvents.clear();
         while(!temp.isEmpty()){
             this.recentEvents.add(temp.poll());
@@ -45,18 +58,18 @@ public class UserRule extends Rule{
     }
 
     public boolean sendAlert(Event event){
+        this.recentEvents.add(event);
         if(this.recentEvents.size() >= numberOfEvents){
             this.recentEvents.poll();
         }
-        this.recentEvents.add(event);
+
         if(event.isSuccessfulLogin()) return false;
-        Queue<Event> temp = new LinkedList<>(this.recentEvents);
-        System.out.println(temp.size());
+        Queue<Event> temp = this.recentEvents;
         while(!temp.isEmpty()){
             Event e = temp.poll();
             if(e.getUserId().equals(event.getUserId()) && !e.isSuccessfulLogin()){
                 counter++;
-            }else if(e.getUserId().equals(event.getUserId()) && e.isSuccessfulLogin()){
+            }else{
                 return false;
             }
             if(counter >= this.getInARow()){

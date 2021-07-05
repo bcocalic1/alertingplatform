@@ -4,6 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
+import javax.persistence.*;
+
+@Table
+@Entity(name = "rules")
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+@DiscriminatorColumn(name="rule_type",
+        discriminatorType = DiscriminatorType.STRING)
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
 @JsonSubTypes({
         @JsonSubTypes.Type(value = CPURule.class, name = "CPU"),
@@ -12,14 +19,26 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
         @JsonSubTypes.Type(value = FileRule.class, name = "File")
 })
 public abstract class Rule {
+    @Id
+    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "service")
     private String service;
+    @Column(name = "threshold")
     private Double limit;
+    @Column(name = "time_period")
     private Double timePeriod;
+    @Column(name = "time_unit")
     private String timeUnit;
+    @Column(name = "severity")
     private String severity;
+    @Column(name = "in_a_row")
     private int inARow;
 
+    public Rule(){}
     public Rule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         this.name = name;
         this.service = service;
@@ -34,10 +53,6 @@ public abstract class Rule {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String getService() {
         return service;
     }
@@ -50,26 +65,6 @@ public abstract class Rule {
         return limit;
     }
 
-    public void setLimit(Double limit) {
-        this.limit = limit;
-    }
-
-    public Double getTimePeriod() {
-        return timePeriod;
-    }
-
-    public void setTimePeriod(Double timePeriod) {
-        this.timePeriod = timePeriod;
-    }
-
-    public String getTimeUnit() {
-        return timeUnit;
-    }
-
-    public void setTimeUnit(String timeUnit) {
-        this.timeUnit = timeUnit;
-    }
-
     public String getDescription(){
         return "kombinovano pravilo/toString() metoda";
     }
@@ -80,5 +75,13 @@ public abstract class Rule {
 
     public int getInARow() {
         return inARow;
+    }
+
+    public Double getTimePeriod() {
+        return timePeriod;
+    }
+
+    public String getTimeUnit() {
+        return timeUnit;
     }
 }

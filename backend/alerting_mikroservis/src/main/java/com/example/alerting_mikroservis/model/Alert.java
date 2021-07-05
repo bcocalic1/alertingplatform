@@ -2,11 +2,21 @@ package com.example.alerting_mikroservis.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "alerts")
 public class Alert {
+    @Id
+    @Column(name = "id", updatable = false, nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
     private String name;
     private String service;
     private String severity;
     private String description;
+
+    protected Alert(){}
 
     public Alert(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("description") String description) {
         this.name = name;

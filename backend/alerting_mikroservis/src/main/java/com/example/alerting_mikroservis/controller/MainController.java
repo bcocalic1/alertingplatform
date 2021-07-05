@@ -1,13 +1,22 @@
 package com.example.alerting_mikroservis.controller;
 
-import com.example.alerting_mikroservis.microservice_classes.CPUMeasurement;
-import com.example.alerting_mikroservis.microservice_classes.Event;
-import com.example.alerting_mikroservis.microservice_classes.Temperature;
-import com.example.alerting_mikroservis.microservice_classes.File;
-import com.example.alerting_mikroservis.model.*;
+import com.example.alerting_mikroservis.model.CPUMeasurement;
+import com.example.alerting_mikroservis.model.Event;
+import com.example.alerting_mikroservis.model.Alert;
+import com.example.alerting_mikroservis.model.CPURule;
+import com.example.alerting_mikroservis.model.Rule;
+import com.example.alerting_mikroservis.model.UserRule;
 import com.example.alerting_mikroservis.service.AlertService;
 import com.example.alerting_mikroservis.service.RuleService;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,68 +25,69 @@ import java.util.Objects;
 @RestController
 @RequestMapping("/api/v1")
 @CrossOrigin(origins = "http://localhost:4200")
-public class MainController {
+public class MainController{
     private final RuleService ruleService;
     private final AlertService alertService;
+    private ConnectionFactory connectionFactory = null;
 
     @Autowired
-    public MainController(@RequestBody RuleService ruleService, @RequestBody AlertService alertService) {
+    public MainController(RuleService ruleService, AlertService alertService) {
         this.ruleService = ruleService;
         this.alertService = alertService;
     }
 
-    @PostMapping("/cpu")
+   /* @PostMapping("/cpu")
     public void getCPUMeasurement(@RequestBody CPUMeasurement measurement){
-        CPURule rule = (CPURule) ruleService.getCPURule();
+        CPURule rule = (CPURule) ruleService.getRuleByService("CPU");
         if(Objects.isNull(rule)){
             System.out.println("No rule added for CPU");
             return;
         }
         if(rule.sendAlert(measurement)){
-           Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-           alertService.addAlert(alert);
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }*/
+
+    @RabbitListener(queues = "cpu-measurement")
+    public void receiveCpuMessage(String message) {
+        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
+        CPUMeasurement cpuMeasurement= gson.fromJson(message, CPUMeasurement.class);
+        System.out.println("Measurement: " + cpuMeasurement.getMeasurement());
+
+        CPURule rule = (CPURule) ruleService.getRuleByService("CPU");
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for CPU");
+            return;
+        }
+
+        if(rule.sendAlert(cpuMeasurement)){
+            System.out.println("sending alert");
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
         }
     }
 
-    @PostMapping("/users")
-    public void getLoginInfo(@RequestBody Event event){
-        UserRule rule = (UserRule) ruleService.getUserRule();
+    @RabbitListener(queues = "user-event")
+    public void receiveUserMessage(String message) {
+        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create(); // Or use new GsonBuilder().create();
+        Event event = gson.fromJson(message, Event.class);
+        System.out.println("Event: " + event.getUserId());
 
+        UserRule rule = (UserRule) ruleService.getRuleByService("users");
         if(Objects.isNull(rule)){
             System.out.println("No rule added for users");
             return;
         }
 
         if(rule.sendAlert(event)){
+            System.out.println("sending alert");
             Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
             alertService.addAlert(alert);
         }
-    }
 
-    @PostMapping("/temperature")
-    public void getTemperatureMeasurement(@RequestBody Temperature measurement){
-        TemperatureRule rule = (TemperatureRule) ruleService.getTemperatureRule();
-        if(Objects.isNull(rule)){
-            System.out.println("No rule added for Temperature");
-            return;
-        }
-        if(rule.sendAlert(measurement)){
-            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-            alertService.addAlert(alert);
-        }
-    }
-
-    @PostMapping("/file")
-    public void getFileLOgs(@RequestBody File log){
-        FileRule rule = (FileRule) ruleService.getFileRule();
-        if(Objects.isNull(rule)){
-            System.out.println("No rule added for Files");
-            return;
-        }
-        if(rule.sendAlert(log)){
-            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-            alertService.addAlert(alert);
-        }
     }
 
     @PostMapping("/rules")
@@ -103,6 +113,11 @@ public class MainController {
     @GetMapping("/alerts/service")
     public List<Alert> getAlertsByService(@RequestBody String service){
         return alertService.getAlertsByService(service);
+    }
+
+    @PutMapping("/rules")
+    public void updateRule(@RequestBody Rule rule){
+        this.ruleService.updateRule(rule);
     }
 
 }
