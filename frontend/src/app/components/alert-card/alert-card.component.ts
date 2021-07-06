@@ -1,4 +1,14 @@
 import { Component, OnInit } from '@angular/core';
+import { AlertServiceService } from 'src/app/service/alert-service.service';
+
+export class Alert {
+  constructor(
+    public name: String,
+    public service: string,
+    public severity: string,
+    public description: string,
+  ){}
+}
 
 @Component({
   selector: 'app-alert-card',
@@ -7,9 +17,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AlertCardComponent implements OnInit {
 
-  constructor() { }
+  alerts !: Alert[];
+
+  constructor(private alertService: AlertServiceService) { }
 
   ngOnInit(): void {
+    this.alertService.retrieveAllAlerts().subscribe(
+      data => {
+        console.log(data)
+        this.alerts = data;
+        console.log(this.alerts);
+      }
+    );
   }
 
 }

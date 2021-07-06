@@ -1,16 +1,16 @@
-<div class="card">
-    <span class="alert-title">FILES ERROR ALERT <img src="assets/images/alert_card_icon.png" class="alert-icon"></span>
+<div class="card" *ngFor="let alert of alerts">
+    <span class="alert-title">{{alert.service.toUpperCase()}} ALERT <img src="assets/images/alert_card_icon.png" class="alert-icon"></span>
     <p>
         <span class="alert-properties">
-            <span class="bold">Service: </span> File service
+            <span class="bold">Service: </span> {{alert.service}} service
         </span> 
 
         <span class="alert-properties">
-            <span class="bold">Severity: </span> <span class="critical">CRITICAL</span> 
+            <span class="bold">Severity: </span> <span class="critical">{{alert.severity}}</span> 
         </span> 
 
         <span class="alert-properties">
-            <span class="bold">Description: </span> More than 5 unprocessed files in one minute!
+            <span class="bold">Description: </span> {{alert.description}}
         </span>
     </p>
     <button class="acknowledge-button">ACKNOWLEDGE</button>
