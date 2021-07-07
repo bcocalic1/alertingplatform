@@ -45,7 +45,7 @@ public class TemperatureRule extends Rule {
         }
         this.recentMeasurements.add(measurement);
 
-        Queue<Temperature> temp = this.recentMeasurements;
+        Queue<Temperature> temp = new LinkedList<>(this.recentMeasurements);
         while(!temp.isEmpty()){
             if(followsRule(temp.poll())){
                 counter = 0;

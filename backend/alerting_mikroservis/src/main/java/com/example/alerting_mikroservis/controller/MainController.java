@@ -55,7 +55,7 @@ public class MainController{
 
     @RabbitListener(queues = "cpu-measurement")
     public void receiveCpuMessage(String message) {
-        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        System.out.println("Received <<<<<  " + message + ">>>>>");
         Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
         CPUMeasurement cpuMeasurement= gson.fromJson(message, CPUMeasurement.class);
         System.out.println("Measurement: " + cpuMeasurement.getMeasurement());
@@ -75,7 +75,7 @@ public class MainController{
 
     @RabbitListener(queues = "user-event")
     public void receiveUserMessage(String message) {
-        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        System.out.println("Received <<<<<  " + message + ">>>>>");
         Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create(); // Or use new GsonBuilder().create();
         Event event = gson.fromJson(message, Event.class);
         System.out.println("Event: " + event.getUserId());
@@ -96,7 +96,7 @@ public class MainController{
 
     @RabbitListener(queues = "temperature-measurement")
     public void receiveTemperatureMessage(String message) {
-        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        System.out.println("Received <<<<<  " + message + ">>>>>");
         Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
         Temperature temperatureMeasurement= gson.fromJson(message, Temperature.class);
         System.out.println("Measurement: " + temperatureMeasurement.getMeasurement());
@@ -116,7 +116,7 @@ public class MainController{
 
     @RabbitListener(queues = "file-log")
     public void receiveFileMessage(String message) {
-        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        System.out.println("Received <<<<<  " + message + ">>>>>");
         Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
         File fileLog = gson.fromJson(message, File.class);
         System.out.println("Log: " + fileLog.getLogs());
