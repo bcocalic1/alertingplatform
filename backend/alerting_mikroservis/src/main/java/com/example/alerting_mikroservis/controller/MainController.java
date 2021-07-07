@@ -8,6 +8,10 @@ import com.example.alerting_mikroservis.model.Rule;
 import com.example.alerting_mikroservis.model.UserRule;
 import com.example.alerting_mikroservis.service.AlertService;
 import com.example.alerting_mikroservis.service.RuleService;
+import com.example.alerting_mikroservis.model.Temperature;
+import com.example.alerting_mikroservis.model.TemperatureRule;
+import com.example.alerting_mikroservis.model.File;
+import com.example.alerting_mikroservis.model.FileRule;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.Channel;
@@ -89,6 +93,74 @@ public class MainController{
         }
 
     }
+
+    @RabbitListener(queues = "temperature-measurement")
+    public void receiveTemperatureMessage(String message) {
+        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
+        Temperature temperatureMeasurement= gson.fromJson(message, Temperature.class);
+        System.out.println("Measurement: " + temperatureMeasurement.getMeasurement());
+
+        TemperatureRule rule = (TemperatureRule) ruleService.getRuleByService("Temperature");
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for Temperature");
+            return;
+        }
+
+        if(rule.sendAlert(temperatureMeasurement)){
+            System.out.println("sending alert");
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+
+    @RabbitListener(queues = "file-log")
+    public void receiveFileMessage(String message) {
+        System.out.println("Received <<<<<  " + message.toString() + ">>>>>");
+        Gson gson = new GsonBuilder().create(); // Or use new GsonBuilder().create();
+        File fileLog = gson.fromJson(message, File.class);
+        System.out.println("Log: " + fileLog.getLogs());
+
+        FileRule rule = (FileRule) ruleService.getRuleByService("File");
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for File");
+            return;
+        }
+
+        if(rule.sendAlert(fileLog)){
+            System.out.println("sending alert");
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+
+    /*
+    @PostMapping("/temperature")
+    public void getTemperatureMeasurement(@RequestBody Temperature measurement){
+        TemperatureRule rule = (TemperatureRule) ruleService.getTemperatureRule();
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for Temperature");
+            return;
+        }
+        if(rule.sendAlert(measurement)){
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+
+    @PostMapping("/file")
+    public void getFileLOgs(@RequestBody File log){
+        FileRule rule = (FileRule) ruleService.getFileRule();
+        if(Objects.isNull(rule)){
+            System.out.println("No rule added for Files");
+            return;
+        }
+        if(rule.sendAlert(log)){
+            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
+            alertService.addAlert(alert);
+        }
+    }
+     */
 
     @PostMapping("/rules")
     public void addRule(@RequestBody Rule rule){
