@@ -10,11 +10,11 @@
         </span> 
 
         <span class="rule-properties">
-            <span class="bold">Description: </span> More than {{rule.limit}} wrong measurements in {{rule.timePeriod}} {{rule.timeUnit}}
+            <span class="bold">Description: </span> More than {{rule.inARow}} wrong measurements in a row.
         </span>
     </p>
     <div class="rule-modifiers">
         <button class="rule-btn edit">EDIT</button>
-        <button class="rule-btn delete">DELETE</button>
+        <button class="rule-btn delete" (click)="deleteRule(rule)">DELETE</button>
     </div>
 </div>

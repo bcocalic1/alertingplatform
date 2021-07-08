@@ -15,7 +15,7 @@ export class NewRuleButtonComponent implements OnInit {
   service !: string;
   services: any[] = [
     { value: 1, name: 'CPU' },
-    { value: 2, name: 'Alerting' },
+    { value: 2, name: 'File' },
     { value: 3, name: 'Temperature' },
     { value: 4, name: 'User management' },
   ];
@@ -83,7 +83,7 @@ export class NewRuleButtonComponent implements OnInit {
     console.log(this.ruleName);
     this.ruleService.createRule(new Rule(this.ruleName, 
       this.service, this.severity, this.limit, 
-      this.timePeriod, this.timeUnit, 5, this.service)).subscribe(
+      this.timePeriod, this.timeUnit, this.limit, this.service)).subscribe(
       data => {
         console.log(data);
       }

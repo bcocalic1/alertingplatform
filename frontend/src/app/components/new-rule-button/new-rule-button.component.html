@@ -33,12 +33,12 @@
                 <div class="input-group marginal">
                     <span class='ruleText marginal'>More than</span>
                     <input type="text" name="limit" [(ngModel)]="limit" class="ruleNumber marginal" required="required">
-                    <p class="ruleType marginal">wrong measurements</p>
-                    <span class="ruleTextTwo marginal">in</span>
-                    <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo marginal" required="required">
+                    <p class="ruleType marginal">wrong measurements in a row.</p>
+                    <!-- <span class="ruleTextTwo marginal">in a row</span> -->
+                    <!-- <input type="text" name="timePeriod" [(ngModel)]="timePeriod" class="ruleNumberTwo marginal" required="required">
                     <select name="timeUnit" (ngModelChange)="selectTimeUnit($event)"  [(ngModel)]="selectedUnit"  class="ruleMetrics marginal" required="required">
                         <option [value]="unit.value" *ngFor="let unit of timeUnits">{{unit.name}}</option>
-                    </select>
+                    </select> -->
                 </div>
             </div>
         </form>

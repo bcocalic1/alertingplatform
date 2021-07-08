@@ -1,3 +1,4 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { RuleServiceService } from 'src/app/service/rule-service.service';
 
@@ -34,6 +35,11 @@ export class RuleCardComponent implements OnInit {
 
   ngOnInit(): void {
     this.refreshRules();
+  }
+
+  deleteRule(rule: Rule){
+    var index = this.rules.indexOf(rule);
+    this.rules.splice(index, 1);
   }
 
   refreshRules() {
