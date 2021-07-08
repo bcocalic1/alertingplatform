@@ -22,8 +22,4 @@ public interface RuleRepository extends JpaRepository<Rule, Integer> {
     @Query(value = "UPDATE rules SET (name, limit, time_period, time_unit, in_a_row) = (?1, ?2, ?3, ?4, ?5) WHERE severity = ?5 AND service = ?6", nativeQuery = true)
     void updateRule(String name, Double limit, Double time_period, String time_unit, Integer inARow, String severity, String service);
 
-    @Modifying
-    @Query(value  = "DELETE FROM rules WHERE service = ?1", nativeQuery = true)
-    void deleteRule(String service);
-
 }
