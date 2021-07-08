@@ -11,7 +11,7 @@ import { Rule, RuleCardComponent } from '../rule-card/rule-card.component';
 export class NewRuleButtonComponent implements OnInit {
 
   closeResult !: string;
-  ruleName !: String;
+  ruleName !: string;
   service !: string;
   services: any[] = [
     { value: 1, name: 'CPU' },
@@ -57,12 +57,6 @@ export class NewRuleButtonComponent implements OnInit {
   
   open(content: any) {
     this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'}).result.then((result) => {
-    // console.log(this.ruleName);
-    // console.log(this.service);
-    // console.log(this.severity);
-    // console.log(this.type);
-    // console.log(this.limit + ' ' + this.timePeriod);
-    // console.log(this.timeUnit);
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;

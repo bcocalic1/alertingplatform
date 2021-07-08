@@ -14,7 +14,50 @@
         </span>
     </p>
     <div class="rule-modifiers">
-        <button class="rule-btn edit">EDIT</button>
+        <button class="rule-btn edit" (click)="open(content, rule.name, rule.inARow, rule.service, rule.severity)">EDIT</button>
         <button class="rule-btn delete" (click)="deleteRule(rule)">DELETE</button>
     </div>
 </div>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title title" id="modal-basic-title">New Rule</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form action="" #ruleForm="ngForm">
+            <div class="form-group">
+                <label for="ruleName" class="label">Name:</label>
+                <div class="input-group marginal">
+                    <input name="ruleName" [(ngModel)]="name"  class="form-control label" placeholder="Enter name..." required="required" >
+                </div>
+                <label for="service" class="label">Service:</label>
+                <div class="input-group marginal">
+                    <select name="service" (ngModelChange)="selectService($event)" [(ngModel)]="service" class="dropdown" required="required">
+                        <option [value]="item.value" *ngFor="let item of services">{{item.name}}</option>
+                    </select>
+                </div>
+                <label for="severity" class="label">Severity:</label>
+                <div class="input-group marginal">
+                    <select name="severity" (ngModelChange)="selectSeverity($event)"  [(ngModel)]="severity"  class="dropdown" required="required">
+                        <option [value]="severity.value" *ngFor="let severity of severities">{{severity.name}}</option>
+                    </select>
+                </div>
+                <label for="rule" class="label">Rule:</label>
+                <div class="input-group marginal">
+                    <span class='ruleText marginal'>More than</span>
+                    <input type="text" [(ngModel)]="limit" name="limit" class="ruleNumber marginal" required="required">
+                    <p class="ruleType marginal">wrong measurements in a row.</p>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="ruleForm.dirty && ruleForm.invalid">
+       
+    </div>
+    <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-dark" (click)="!ruleForm.invalid">Update Rule</button>
+    </div>
+</ng-template>
