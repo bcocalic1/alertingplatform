@@ -188,4 +188,10 @@ public class MainController{
         this.ruleService.updateRule(rule);
     }
 
+
+    @DeleteMapping("/rules")
+    public void deleteRule(@RequestBody String service){
+        this.ruleService.deleteRule(service);
+    }
+
 }
