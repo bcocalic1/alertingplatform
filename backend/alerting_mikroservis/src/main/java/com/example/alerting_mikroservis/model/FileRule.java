@@ -1,16 +1,29 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.microservice_classes.File;
+import com.example.alerting_mikroservis.model.File;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
 import java.util.LinkedList;
 import java.util.Queue;
 
+
+@Entity
+@DiscriminatorValue("File")
 public class FileRule extends Rule {
 
+    @Transient
     private static final int numberOfLogs = 100;
+
+    @Transient
     private Queue<File> recentLogs;
-    private int counter;
+
+    @Transient
+    private int counter = 0;
+
+    public FileRule(){}
 
     public FileRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, null, null, null, inARow);
