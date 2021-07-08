@@ -1,21 +1,29 @@
 package com.example.alerting_mikroservis.model;
 
-import com.example.alerting_mikroservis.microservice_classes.Temperature;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.LinkedList;
-import java.util.Queue;
+import javax.persistence.DiscriminatorValue;
+import javax.persistence.Entity;
+import javax.persistence.Transient;
+import java.util.*;
 
+@Entity
+@DiscriminatorValue("Temperature")
 public class TemperatureRule extends Rule {
 
+    @Transient
     private static final int numberOfMeasurements = 100;
-    private Queue<Temperature> recentMeasurements;
+
+    @Transient
+    private static final Queue<Temperature> recentMeasurements = new LinkedList<>();
+
+    @Transient
     private int counter;
 
-    public TemperatureRule(@JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("limit") Double limit, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
+    public TemperatureRule(){}
+
+    public TemperatureRule(@JsonProperty("limit") Double limit, @JsonProperty("name") String name, @JsonProperty("service") String service, @JsonProperty("severity") String severity, @JsonProperty("timePeriod") Double timePeriod, @JsonProperty("timeUnit") String timeUnit, @JsonProperty("inARow") int inARow) {
         super(name, service, severity, limit, null, null, inARow);
-        recentMeasurements = new LinkedList<>();
-        this.counter = 0;
     }
 
     @Override
@@ -37,7 +45,7 @@ public class TemperatureRule extends Rule {
         }
         this.recentMeasurements.add(measurement);
 
-        Queue<Temperature> temp = this.recentMeasurements;
+        Queue<Temperature> temp = new LinkedList<>(this.recentMeasurements);
         while(!temp.isEmpty()){
             if(followsRule(temp.poll())){
                 counter = 0;

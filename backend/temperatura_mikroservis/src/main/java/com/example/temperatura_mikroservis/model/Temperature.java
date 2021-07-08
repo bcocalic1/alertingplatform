@@ -15,6 +15,13 @@ public class Temperature {
         this.measurement = measurement;
     }
 
+    public static Double getMin() {
+        return min;
+    }
+    public static Double getMax() {
+        return max;
+    }
+
     public Double getMeasurement() {
         return measurement;
     }

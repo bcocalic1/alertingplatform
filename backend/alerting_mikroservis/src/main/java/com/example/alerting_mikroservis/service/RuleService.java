@@ -31,11 +31,6 @@ public class RuleService {
         return this.ruleRepository.findByService(service);
     }
 
-    public List<Rule> getRulesBySeverity(String severity){
-        return this.ruleRepository.findBySeverity(severity);
-    }
-
-
     public List<Rule> getAllRules(){
         return this.ruleRepository.findAll();
     }
