@@ -17,6 +17,8 @@ import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.util.Pair;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -189,9 +191,12 @@ public class MainController{
     }
 
 
-    @DeleteMapping("/rules")
-    public void deleteRule(@RequestBody String service){
-        this.ruleService.deleteRule(service);
+    @DeleteMapping("/rules/{service}")
+    public void deleteRule(@PathVariable(value = "service") String service){
+        Rule rule = this.ruleService.getRuleByService(service);
+        if(Objects.isNull(rule)){
+            throw new IllegalArgumentException("No rule for " + service);
+        }
+        this.ruleService.deleteRule(rule);
     }
-
 }

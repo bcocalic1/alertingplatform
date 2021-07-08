@@ -42,8 +42,7 @@ public class RuleService {
         this.ruleRepository.updateRule(rule.getName(), rule.getLimit(), rule.getTimePeriod(), rule.getTimeUnit(), rule.getInARow(), rule.getSeverity(), rule.getService());
     }
 
-    public void deleteRule(String service){
-
-        this.ruleRepository.deleteRule(service);
+    public void deleteRule(Rule rule){
+        this.ruleRepository.delete(rule);
     }
 }
