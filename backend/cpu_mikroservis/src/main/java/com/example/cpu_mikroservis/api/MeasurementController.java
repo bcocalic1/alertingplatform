@@ -9,9 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
@@ -40,8 +38,8 @@ public class MeasurementController {
         }
         obj.put("measurement", jsonArray);
         obj.put("numberOfProcessors", measurement.getNumberOfProcessors());
-        obj.put("min", measurement.getMin());
-        obj.put("max", measurement.getMax());
+        obj.put("min", CPUMeasurement.getMin());
+        obj.put("max", CPUMeasurement.getMax());
         channel.basicPublish("", "cpu-measurement", null, obj.toString().getBytes());
         channel.close();
         connection.close();

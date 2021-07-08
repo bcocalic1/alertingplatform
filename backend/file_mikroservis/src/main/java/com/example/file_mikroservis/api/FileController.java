@@ -3,9 +3,18 @@ package com.example.file_mikroservis.api;
 import com.example.file_mikroservis.model.File;
 import com.example.file_mikroservis.service.FileService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
+
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
+import java.util.concurrent.TimeoutException;
+
 
 @RestController
 @RequestMapping("/api/v1/file")
@@ -18,12 +27,18 @@ public class FileController {
     }
 
     @PostMapping
-    public void addLog(@RequestBody File log){
+    public void addLog(@RequestBody File log) throws IOException, TimeoutException, JSONException {
         fileService.addLog(log);
 
-        RestTemplate restTemplate = new RestTemplate();
-        HttpEntity<File> request = new HttpEntity<>(log);
-        File response = restTemplate.postForObject("http://localhost:8080/api/v1/file", request, File.class);
-        System.out.println(response);
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        Connection connection = connectionFactory.newConnection();
+        Channel channel = connection.createChannel();
+        JSONObject obj = new JSONObject();
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(log.getLogs());
+        obj.put("log", jsonArray);
+        channel.basicPublish("", "file-log", null, obj.toString().getBytes());
+        channel.close();
+        connection.close();
     }
 }
