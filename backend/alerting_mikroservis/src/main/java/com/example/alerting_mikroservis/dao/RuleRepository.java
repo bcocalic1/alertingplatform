@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
-
+@Transactional
 @Repository("rules")
 public interface RuleRepository extends JpaRepository<Rule, Integer> {
     @Query(value = "SELECT * FROM rules WHERE service = ?1", nativeQuery = true)
@@ -20,5 +21,9 @@ public interface RuleRepository extends JpaRepository<Rule, Integer> {
     @Modifying
     @Query(value = "UPDATE rules SET (name, limit, time_period, time_unit, in_a_row) = (?1, ?2, ?3, ?4, ?5) WHERE severity = ?5 AND service = ?6", nativeQuery = true)
     void updateRule(String name, Double limit, Double time_period, String time_unit, Integer inARow, String severity, String service);
+
+    @Modifying
+    @Query(value  = "DELETE FROM rules WHERE service = ?1", nativeQuery = true)
+    void deleteRule(String service);
 
 }

@@ -40,6 +40,10 @@ public class RuleService {
             throw new RuntimeException("No such rule");
         }
         this.ruleRepository.updateRule(rule.getName(), rule.getLimit(), rule.getTimePeriod(), rule.getTimeUnit(), rule.getInARow(), rule.getSeverity(), rule.getService());
+    }
 
+    public void deleteRule(String service){
+
+        this.ruleRepository.deleteRule(service);
     }
 }
