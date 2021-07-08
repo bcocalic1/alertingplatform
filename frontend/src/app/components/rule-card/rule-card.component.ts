@@ -40,6 +40,11 @@ export class RuleCardComponent implements OnInit {
   deleteRule(rule: Rule){
     var index = this.rules.indexOf(rule);
     this.rules.splice(index, 1);
+    this.ruleService.deleteRule(rule.service).subscribe(
+      response => {
+        console.log(response);
+      }
+    );
   }
 
   refreshRules() {

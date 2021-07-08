@@ -14,6 +14,10 @@ export class RuleServiceService {
     return this.http.post(`http://localhost:8080/api/v1/rules`, rule);
   }
 
+  deleteRule(service: string){
+    return this.http.delete(`http://localhost:8080/api/v1/rules/${service}`);
+  }
+
   retrieveAllRules(){
     return this.http.get<Rule[]>(`http://localhost:8080/api/v1/rules`);
   }
