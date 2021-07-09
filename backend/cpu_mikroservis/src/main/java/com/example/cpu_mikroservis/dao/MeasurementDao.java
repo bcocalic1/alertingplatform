@@ -1,4 +1,4 @@
-package com.example.CPU_mikroservis.dao;
+package com.example.cpu_mikroservis.dao;
 
 import com.example.cpu_mikroservis.model.CPUMeasurement;
 import org.springframework.stereotype.Repository;
