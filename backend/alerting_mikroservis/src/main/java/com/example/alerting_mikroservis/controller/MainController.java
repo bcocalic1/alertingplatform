@@ -17,8 +17,6 @@ import com.google.gson.GsonBuilder;
 import com.rabbitmq.client.ConnectionFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.util.Pair;
-import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -131,34 +129,6 @@ public class MainController{
             alertService.addAlert(alert);
         }
     }
-
-    /*
-    @PostMapping("/temperature")
-    public void getTemperatureMeasurement(@RequestBody Temperature measurement){
-        TemperatureRule rule = (TemperatureRule) ruleService.getTemperatureRule();
-        if(Objects.isNull(rule)){
-            System.out.println("No rule added for Temperature");
-            return;
-        }
-        if(rule.sendAlert(measurement)){
-            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-            alertService.addAlert(alert);
-        }
-    }
-
-    @PostMapping("/file")
-    public void getFileLOgs(@RequestBody File log){
-        FileRule rule = (FileRule) ruleService.getFileRule();
-        if(Objects.isNull(rule)){
-            System.out.println("No rule added for Files");
-            return;
-        }
-        if(rule.sendAlert(log)){
-            Alert alert = new Alert(rule.getName(), rule.getService(), rule.getSeverity(), rule.getDescription());
-            alertService.addAlert(alert);
-        }
-    }
-     */
 
     @PostMapping("/rules")
     public void addRule(@RequestBody Rule rule){
