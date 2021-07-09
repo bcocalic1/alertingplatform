@@ -26,6 +26,7 @@ export class AlertCardComponent implements OnInit {
       data => {
         console.log(data)
         this.alerts = data;
+        this.alerts.reverse();
         console.log(this.alerts);
       }
     );
